@@ -1,38 +1,38 @@
 //Breakpoints
-
+//
 $mobile: 375px;
 $desktop: 1440px;
-
+//
 //Primary
-
+//
 $lightRedCTAtext: hsl(356, 100%, 66%);
 $veryLightRedHover: hsl(355, 100%, 74%);
 $darkBlueHeadings: hsl(208, 49%, 24%);
-
+//
 //Neutral
-
+//
 $white: hsl(0, 0%, 100%);
 $grayFooterText: hsl(240, 2%, 79%);
 $GrayBlueBody: hsl(207, 13%, 34%);
 $darkFooterBackground: hsl(240, 10%, 16%);
-
+//
 //Background gradient - Intro/CTA mobile nav:
-
+//
 $gradientVeryLightRed: hsl(13, 100%, 72%);
 $lightRed: hsl(353, 100%, 62%);
-
+//
 //Background gradient - body:
-
+//
 $darkGrayBlueGradient: hsl(237, 17%, 21%);
 $desaturateBlueGradient: hsl(237, 23%, 32%);
-
+//
 //Fonts
-
+//
 $overpassFont: "Overpass", sans-serif;
 $ubuntuFont: "Ubuntu", sans-serif;
-
+//
 //attribution
-
+//
 .attribution {
 	font-size: 11px;
 	text-align: center;
@@ -51,23 +51,25 @@ body {
 	font-family: $ubuntuFont;
 	font-size: 100%;
 }
-
-//header
-
+//
+//header container
+//
 .header {
 	background-image: url("./images/bg-pattern-intro.svg"),
 		linear-gradient(to top, $lightRed, $gradientVeryLightRed);
-	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
 	position: relative;
 	color: $white;
 	border-bottom-left-radius: 80px;
-	padding-bottom: 6rem;
+	padding-bottom: 8rem;
 
 	&__menu,
 	&__close {
 		position: absolute;
 		right: 2rem;
 		top: 2.5rem;
+		cursor: pointer;
 
 		&.none {
 			display: none;
@@ -86,7 +88,7 @@ body {
 	}
 
 	&__intro {
-		font-size: 2rem;
+		font-size: 1.8rem;
 		font-weight: 200;
 		text-align: center;
 		padding-top: 4rem;
@@ -104,17 +106,27 @@ body {
 	font-size: 2.1rem;
 	padding: 2rem 0 2rem 1.5rem;
 }
-
+//
+//navigation
+//
 .navbar {
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%) scale(1.1);
 	background: $white;
 	width: 90%;
 	margin: 0 auto;
 	padding: 1rem 0;
 	text-align: center;
-	border-radius: 10px;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.8s ease-in-out;
 
-	&.none {
-		display: none;
+	&.show {
+		opacity: 1;
+		pointer-events: all;
+		transform: scale(1) translatex(-50%);
+		border-radius: 15px;
 	}
 
 	&__login,
@@ -123,7 +135,9 @@ body {
 		margin: 0 auto;
 	}
 }
-
+//
+//dropdown buttons and content
+//
 .dropdown {
 	&__btn {
 		border: none;
@@ -132,6 +146,7 @@ body {
 		color: $darkBlueHeadings;
 		font-size: 0.95rem;
 		margin: 1rem 0;
+		cursor: pointer;
 	}
 
 	&__content {
@@ -139,6 +154,7 @@ body {
 		margin: 1rem auto;
 		background-color: lighten($grayFooterText, 15%);
 		padding: 0.5rem 0;
+		display: none;
 
 		& a {
 			display: block;
@@ -146,16 +162,21 @@ body {
 			color: darken($grayFooterText, 35%);
 			font-weight: 500;
 			margin: 1rem 0;
-			font-size: 0.85rem;
+			font-size: 0.9rem;
+
+			&:hover {
+				color: black;
+			}
 		}
 
-		&.none {
-			display: none;
+		&.show {
+			display: block;
 		}
 	}
 
 	&__arrow {
 		margin-left: 5px;
+		cursor: pointer;
 
 		&.close {
 			transform: rotate(180deg);
@@ -188,6 +209,8 @@ body {
 	padding: 0.75rem;
 	font-weight: 600;
 	margin: 0 5px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
 
 	&--orange {
 		background-image: linear-gradient(
@@ -200,11 +223,20 @@ body {
 
 	&--white {
 		color: $lightRed;
+		&:hover {
+			background-color: $veryLightRedHover;
+			color: $white;
+		}
 	}
 
 	&--transparent {
 		background-color: transparent;
 		border: 1px solid white;
 		color: white;
+
+		&:hover {
+			background-color: $white;
+			color: $lightRed;
+		}
 	}
 }
